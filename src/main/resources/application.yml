@@ -6,9 +6,9 @@ spring:
     name: order-service
 
   kafka:
-    bootstrap-servers: ec2-13-201-72-156.ap-south-1.compute.amazonaws.com:9092
+    bootstrap-servers: ${BOOTSTRAP_SERVER}
     consumer:
-      group-id: order-service-group
+      group-id: ${GROUP_ID}
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       properties.spring.json.trusted-packages: "*"
