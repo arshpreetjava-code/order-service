@@ -22,7 +22,7 @@ public class OrderService {
     public OrderEvent createOrder(OrderDto orderDto){
 
         long totalAmount = orderDto.getFood().getQuantity() * orderDto.getFood().getPrice();
-//        String key = orderDto.getFood().getName();
+        String key = orderDto.getOrderId();
 
         OrderEvent orderEvent = OrderEvent.builder()
                 .orderId(orderDto.getOrderId())
@@ -34,7 +34,7 @@ public class OrderService {
                 .build();
         try {
             log.info("Sending Order to Kafka: {}", orderEvent);
-            kafkaTemplate.send(ORDER_CREATED, orderEvent);
+            kafkaTemplate.send(ORDER_CREATED, key, orderEvent);
             return orderEvent;
         } catch (Exception e) {
             log.error("Failed to send message to Kafka", e);
