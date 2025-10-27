@@ -19,6 +19,17 @@ public class OrderService {
 
     private final KafkaTemplate<String, OrderEvent> kafkaTemplate;
 
+    /**
+     * Create an OrderEvent from the provided OrderDto and publish it to Kafka.
+     * <p>
+     * Calculates the total amount from the food item quantity and price, builds
+     * an OrderEvent and sends it to the ORDER_CREATED topic. Returns the created
+     * OrderEvent on success.
+     *
+     * @param orderDto DTO containing the order details
+     * @return the created OrderEvent that was published to Kafka
+     * @throws RuntimeException if publishing to Kafka fails
+     */
     public OrderEvent createOrder(OrderDto orderDto){
 
         long totalAmount = orderDto.getFood().getQuantity() * orderDto.getFood().getPrice();
