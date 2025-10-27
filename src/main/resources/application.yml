@@ -1,0 +1,18 @@
+server:
+    port: 8080
+
+spring:
+  application:
+    name: order-service
+
+  kafka:
+    bootstrap-servers: ec2-13-201-72-156.ap-south-1.compute.amazonaws.com:9092
+    consumer:
+      group-id: order-service-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      properties.spring.json.trusted-packages: "*"
+      enable-auto-commit: false
+
+  config:
+    import: optional:classpath:env.properties
